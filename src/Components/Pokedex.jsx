@@ -1,5 +1,6 @@
 import React from "react";
 import { AppBar, Toolbar, Grid, makeStyles } from "@material-ui/core";
+import Pokecard from "./Pokecard";
 
 const useStyles = makeStyles({
   pokedexContainer: {
@@ -16,15 +17,10 @@ const Pokedex = () => {
         <Toolbar>Sagar's Pokedex </Toolbar>
       </AppBar>
       <Grid container spacing={2} className={classes.pokedexContainer}>
-        <Grid item xs={12} sm={6} md={4} lg={3}>
-          1
-        </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3}>
-          2
-        </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3}>
-          3
-        </Grid>
+        <Pokecard />
+        <Pokecard />
+        <Pokecard />
+        <Pokecard />
       </Grid>
     </React.Fragment>
   );
