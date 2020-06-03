@@ -9,7 +9,9 @@ import {
   CardContent,
   CardMedia,
   Typography,
+  TextField,
 } from "@material-ui/core";
+import SearchIcon from "@material-ui/icons/Search";
 import axios from "axios";
 
 const useStyles = makeStyles({
@@ -30,6 +32,7 @@ const useStyles = makeStyles({
   cardStyle: {
     backgroundColor: "#f1f1f1",
     borderRadius: "15%",
+    borderBottomColor: "#222",
   },
   cardMedia: {
     margin: "auto",
@@ -43,12 +46,20 @@ const useStyles = makeStyles({
     color: "#666",
     letterSpacing: "0.25em",
   },
+  searchContainer: {
+    display: "flex",
+    justifyContent: "center",
+  },
 });
 
 const Pokedex = (props) => {
   const { history } = props;
   const classes = useStyles();
   const [pokemonData, setPokemonData] = useState({});
+  const [filter, setFilter] = useState("");
+  const handleSearchChange = (e) => {
+    setFilter(e.target.value);
+  };
   useEffect(() => {
     axios
       .get("https://pokeapi.co/api/v2/pokemon?limit=808")
@@ -94,11 +105,25 @@ const Pokedex = (props) => {
   return (
     <React.Fragment>
       <AppBar position="static" className={classes.appbarStyle}>
-        <Toolbar>Sagar's Pokedex </Toolbar>
+        <Toolbar>
+          <div className={classes.searchContainer}>
+            <SearchIcon className={classes.searchIcon} />
+            <TextField
+              onChange={handleSearchChange}
+              className={classes.searchField}
+              label="Pokemon"
+              variant="outlined"
+            />
+          </div>
+        </Toolbar>
       </AppBar>
       {pokemonData ? (
         <Grid container spacing={2} className={classes.pokedexContainer}>
-          {Object.keys(pokemonData).map((pokemonId) => Pokecard(pokemonId))}
+          {Object.keys(pokemonData).map(
+            (pokemonId) =>
+              pokemonData[pokemonId].name.includes(filter) &&
+              Pokecard(pokemonId)
+          )}
         </Grid>
       ) : (
         <CircularProgress className={classes.progressStyle} />
