@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import mockData from "../mockData";
 import { Typography } from "@material-ui/core";
 const Pokemon = (props) => {
   const { match } = props;
@@ -19,6 +18,7 @@ const Pokemon = (props) => {
         <img
           src={fullImageUrl}
           style={{ width: "17.25rem", height: "17.25rem" }}
+          alt=""
         />
         <Typography variant="h4">Pokemon Information:</Typography>
         <Typography>{`Species: ${species.name}`}</Typography>
