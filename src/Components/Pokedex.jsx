@@ -9,9 +9,8 @@ import {
   CardContent,
   CardMedia,
   Typography,
-  TextField,
 } from "@material-ui/core";
-import SearchIcon from "@material-ui/icons/Search";
+import GitHubIcon from "@material-ui/icons/GitHub";
 import axios from "axios";
 
 const useStyles = makeStyles({
@@ -32,7 +31,6 @@ const useStyles = makeStyles({
   cardStyle: {
     backgroundColor: "#f1f1f1",
     borderRadius: "15%",
-    borderBottomColor: "#222",
   },
   cardMedia: {
     margin: "auto",
@@ -46,9 +44,11 @@ const useStyles = makeStyles({
     color: "#666",
     letterSpacing: "0.25em",
   },
-  searchContainer: {
-    display: "flex",
-    justifyContent: "center",
+  topText: {
+    fontSize: "2rem",
+    fontWeight: "bolder",
+    letterSpacing: "4px",
+    margin: "auto",
   },
 });
 
@@ -56,10 +56,6 @@ const Pokedex = (props) => {
   const { history } = props;
   const classes = useStyles();
   const [pokemonData, setPokemonData] = useState({});
-  const [filter, setFilter] = useState("");
-  const handleSearchChange = (e) => {
-    setFilter(e.target.value);
-  };
   useEffect(() => {
     axios
       .get("https://pokeapi.co/api/v2/pokemon?limit=808")
@@ -80,7 +76,7 @@ const Pokedex = (props) => {
       });
   }, []);
   const Pokecard = (pokemonId) => {
-    const { id, name, sprite } = pokemonData[pokemonId];
+    const { name, sprite } = pokemonData[pokemonId];
 
     return (
       <Grid item xs={12} sm={6} md={4} lg={3} key={pokemonId}>
@@ -104,26 +100,19 @@ const Pokedex = (props) => {
   };
   return (
     <React.Fragment>
-      <AppBar position="static" className={classes.appbarStyle}>
+      <AppBar position="fixed" className={classes.appbarStyle}>
         <Toolbar>
-          <div className={classes.searchContainer}>
-            <SearchIcon className={classes.searchIcon} />
-            <TextField
-              onChange={handleSearchChange}
-              className={classes.searchField}
-              label="Pokemon"
-              variant="outlined"
-            />
-          </div>
+          <Typography className={classes.topText}>Sagar's Pokedex</Typography>
+          {/* <Grid direction="row" justify="flex">
+            <Grid item>
+              <GitHubIcon />
+            </Grid>
+          </Grid> */}
         </Toolbar>
       </AppBar>
       {pokemonData ? (
         <Grid container spacing={2} className={classes.pokedexContainer}>
-          {Object.keys(pokemonData).map(
-            (pokemonId) =>
-              pokemonData[pokemonId].name.includes(filter) &&
-              Pokecard(pokemonId)
-          )}
+          {Object.keys(pokemonData).map((pokemonId) => Pokecard(pokemonId))}
         </Grid>
       ) : (
         <CircularProgress className={classes.progressStyle} />
