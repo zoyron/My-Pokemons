@@ -4,6 +4,7 @@ import { Grid, Card, CardContent, makeStyles } from "@material-ui/core";
 const useStyle = makeStyles({
   cardStyle: {
     backgroundColor: "#f1f1f1",
+    borderRadius: "7.5%",
   },
 });
 const Pokecard = () => {
