@@ -4,9 +4,9 @@ import Pokecard from "./Pokecard";
 
 const useStyles = makeStyles({
   pokedexContainer: {
-    paddingTop: "20px",
-    paddingLeft: "50px",
-    paddingRight: "50px",
+    paddingTop: "1.5em",
+    paddingLeft: "3em",
+    paddingRight: "3em",
   },
 });
 const Pokedex = () => {
