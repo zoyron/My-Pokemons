@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Typography,
   CircularProgress,
   makeStyles,
   Button,
 } from "@material-ui/core";
-
+import axios from "axios";
 const useStyles = makeStyles({
   progressStyle: {
     color: "#222",
@@ -20,6 +20,17 @@ const Pokemon = (props) => {
   const { params } = match;
   const { pokemonId } = params;
   const [pokemon, setPokemon] = useState(undefined);
+  useEffect(() => {
+    axios
+      .get(`https://pokeapi.co/api/v2/pokemon/${pokemonId}/`)
+      .then((response) => {
+        const { data } = response;
+        setPokemon(data);
+      })
+      .catch((error) => {
+        setPokemon(false);
+      });
+  }, [pokemonId]);
   const generatePokemonJSX = () => {
     const { name, id, species, height, weight, types, sprites } = pokemon;
     const fullImageUrl = `https://pokeres.bastionbot.org/images/pokemon/${id}.png`;
