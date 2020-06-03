@@ -99,7 +99,7 @@ const Pokedex = (props) => {
   };
   return (
     <React.Fragment>
-      <AppBar position="fixed" className={classes.appbarStyle}>
+      <AppBar position="static" className={classes.appbarStyle}>
         <Toolbar>
           <Typography className={classes.topText}>Sagar's Pokedex</Typography>
           {/* <Grid direction="row" justify="flex">
