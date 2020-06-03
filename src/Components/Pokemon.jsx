@@ -1,10 +1,25 @@
 import React, { useState } from "react";
-import { Typography } from "@material-ui/core";
+import {
+  Typography,
+  CircularProgress,
+  makeStyles,
+  Button,
+} from "@material-ui/core";
+
+const useStyles = makeStyles({
+  progressStyle: {
+    color: "#222",
+    position: "fixed",
+    top: "50%",
+    left: "45%",
+  },
+});
 const Pokemon = (props) => {
-  const { match } = props;
+  const classes = useStyles();
+  const { history, match } = props;
   const { params } = match;
   const { pokemonId } = params;
-  const [pokemon, setPokemon] = useState(mockData[`${pokemonId}`]);
+  const [pokemon, setPokemon] = useState(undefined);
   const generatePokemonJSX = () => {
     const { name, id, species, height, weight, types, sprites } = pokemon;
     const fullImageUrl = `https://pokeres.bastionbot.org/images/pokemon/${id}.png`;
@@ -33,7 +48,20 @@ const Pokemon = (props) => {
       </React.Fragment>
     );
   };
-  return <React.Fragment>{generatePokemonJSX()}</React.Fragment>;
+  return (
+    <React.Fragment>
+      {pokemon === undefined && (
+        <CircularProgress className={classes.progressStyle} />
+      )}
+      {pokemon !== undefined && pokemon && generatePokemonJSX()}
+      {pokemon === false && <Typography>Pokemon Not found</Typography>}
+      {pokemon !== undefined && (
+        <Button variant="outlined" onClick={() => history.push("/")}>
+          Back to Pokedex
+        </Button>
+      )}
+    </React.Fragment>
+  );
 };
 
 export default Pokemon;

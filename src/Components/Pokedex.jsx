@@ -15,8 +15,8 @@ import axios from "axios";
 const useStyles = makeStyles({
   pokedexContainer: {
     paddingTop: "1.5em",
-    paddingLeft: "3em",
-    paddingRight: "3em",
+    paddingLeft: "2em",
+    paddingRight: "2em",
   },
   appbarStyle: {
     backgroundColor: "#222",
@@ -29,7 +29,7 @@ const useStyles = makeStyles({
   },
   cardStyle: {
     backgroundColor: "#f1f1f1",
-    borderRadius: "7.5%",
+    borderRadius: "15%",
   },
   cardMedia: {
     margin: "auto",
