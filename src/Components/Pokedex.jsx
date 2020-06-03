@@ -45,7 +45,8 @@ const useStyles = makeStyles({
   },
 });
 
-const Pokedex = () => {
+const Pokedex = (props) => {
+  const { history } = props;
   const classes = useStyles();
   const [pokemonData, setPokemonData] = useState(mockData);
   const Pokecard = (pokemonId) => {
@@ -54,7 +55,10 @@ const Pokedex = () => {
     const classes = useStyles();
     return (
       <Grid item xs={12} sm={6} md={4} lg={3} key={pokemonId}>
-        <Card className={classes.cardStyle}>
+        <Card
+          className={classes.cardStyle}
+          onClick={() => history.push(`/${pokemonId}`)}
+        >
           <CardMedia
             className={classes.cardMedia}
             image={stripe}
