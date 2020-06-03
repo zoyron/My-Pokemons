@@ -10,7 +10,6 @@ import {
   CardMedia,
   Typography,
 } from "@material-ui/core";
-import GitHubIcon from "@material-ui/icons/GitHub";
 import axios from "axios";
 
 const useStyles = makeStyles({
